@@ -18,8 +18,8 @@ To test special tags
 ### Example
 ```java
 // Import classes:
-//import org.openapitools.client.ApiException;
-//import org.openapitools.client.api.AnotherFakeApi;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.api.AnotherFakeApi;
 
 
 AnotherFakeApi apiInstance = new AnotherFakeApi();

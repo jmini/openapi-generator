@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 <a name="createUser"></a>
 # **createUser**
-> createUser(user)
+> createUser(body)
 
 Create user
 
@@ -25,14 +25,14 @@ This can only be done by the logged in user.
 ### Example
 ```java
 // Import classes:
-//import org.openapitools.client.ApiException;
-//import org.openapitools.client.api.UserApi;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.api.UserApi;
 
 
 UserApi apiInstance = new UserApi();
-User user = new User(); // User | Created user object
+User body = new User(); // User | Created user object
 try {
-    apiInstance.createUser(user);
+    apiInstance.createUser(body);
 } catch (ApiException e) {
     System.err.println("Exception when calling UserApi#createUser");
     e.printStackTrace();
@@ -43,7 +43,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user** | [**User**](User.md)| Created user object |
+ **body** | [**User**](User.md)| Created user object |
 
 ### Return type
 
@@ -56,25 +56,27 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/xml, application/json
 
 <a name="createUsersWithArrayInput"></a>
 # **createUsersWithArrayInput**
-> createUsersWithArrayInput(user)
+> createUsersWithArrayInput(body)
 
 Creates list of users with given input array
+
+
 
 ### Example
 ```java
 // Import classes:
-//import org.openapitools.client.ApiException;
-//import org.openapitools.client.api.UserApi;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.api.UserApi;
 
 
 UserApi apiInstance = new UserApi();
-List<User> user = Arrays.asList(new List()); // List<User> | List of user object
+List<User> body = Arrays.asList(new User()); // List<User> | List of user object
 try {
-    apiInstance.createUsersWithArrayInput(user);
+    apiInstance.createUsersWithArrayInput(body);
 } catch (ApiException e) {
     System.err.println("Exception when calling UserApi#createUsersWithArrayInput");
     e.printStackTrace();
@@ -85,7 +87,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user** | [**List&lt;User&gt;**](List.md)| List of user object |
+ **body** | [**List&lt;User&gt;**](User.md)| List of user object |
 
 ### Return type
 
@@ -98,25 +100,27 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/xml, application/json
 
 <a name="createUsersWithListInput"></a>
 # **createUsersWithListInput**
-> createUsersWithListInput(user)
+> createUsersWithListInput(body)
 
 Creates list of users with given input array
+
+
 
 ### Example
 ```java
 // Import classes:
-//import org.openapitools.client.ApiException;
-//import org.openapitools.client.api.UserApi;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.api.UserApi;
 
 
 UserApi apiInstance = new UserApi();
-List<User> user = Arrays.asList(new List()); // List<User> | List of user object
+List<User> body = Arrays.asList(new User()); // List<User> | List of user object
 try {
-    apiInstance.createUsersWithListInput(user);
+    apiInstance.createUsersWithListInput(body);
 } catch (ApiException e) {
     System.err.println("Exception when calling UserApi#createUsersWithListInput");
     e.printStackTrace();
@@ -127,7 +131,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user** | [**List&lt;User&gt;**](List.md)| List of user object |
+ **body** | [**List&lt;User&gt;**](User.md)| List of user object |
 
 ### Return type
 
@@ -140,7 +144,7 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/xml, application/json
 
 <a name="deleteUser"></a>
 # **deleteUser**
@@ -153,8 +157,8 @@ This can only be done by the logged in user.
 ### Example
 ```java
 // Import classes:
-//import org.openapitools.client.ApiException;
-//import org.openapitools.client.api.UserApi;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.api.UserApi;
 
 
 UserApi apiInstance = new UserApi();
@@ -184,7 +188,7 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/xml, application/json
 
 <a name="getUserByName"></a>
 # **getUserByName**
@@ -192,11 +196,13 @@ No authorization required
 
 Get user by user name
 
+
+
 ### Example
 ```java
 // Import classes:
-//import org.openapitools.client.ApiException;
-//import org.openapitools.client.api.UserApi;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.api.UserApi;
 
 
 UserApi apiInstance = new UserApi();
@@ -235,11 +241,13 @@ No authorization required
 
 Logs user into the system
 
+
+
 ### Example
 ```java
 // Import classes:
-//import org.openapitools.client.ApiException;
-//import org.openapitools.client.api.UserApi;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.api.UserApi;
 
 
 UserApi apiInstance = new UserApi();
@@ -280,11 +288,13 @@ No authorization required
 
 Logs out current logged in user session
 
+
+
 ### Example
 ```java
 // Import classes:
-//import org.openapitools.client.ApiException;
-//import org.openapitools.client.api.UserApi;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.api.UserApi;
 
 
 UserApi apiInstance = new UserApi();
@@ -310,11 +320,11 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/xml, application/json
 
 <a name="updateUser"></a>
 # **updateUser**
-> updateUser(username, user)
+> updateUser(username, body)
 
 Updated user
 
@@ -323,15 +333,15 @@ This can only be done by the logged in user.
 ### Example
 ```java
 // Import classes:
-//import org.openapitools.client.ApiException;
-//import org.openapitools.client.api.UserApi;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.api.UserApi;
 
 
 UserApi apiInstance = new UserApi();
 String username = "username_example"; // String | name that need to be deleted
-User user = new User(); // User | Updated user object
+User body = new User(); // User | Updated user object
 try {
-    apiInstance.updateUser(username, user);
+    apiInstance.updateUser(username, body);
 } catch (ApiException e) {
     System.err.println("Exception when calling UserApi#updateUser");
     e.printStackTrace();
@@ -343,7 +353,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **username** | **String**| name that need to be deleted |
- **user** | [**User**](User.md)| Updated user object |
+ **body** | [**User**](User.md)| Updated user object |
 
 ### Return type
 
@@ -356,5 +366,5 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/xml, application/json
 

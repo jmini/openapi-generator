@@ -21,7 +21,7 @@ For valid response try integer IDs with value &lt; 1000. Anything above 1000 or 
 ### Example
 ```java
 // Import classes:
-//import org.openapitools.client.ApiClient;
+//import io.swagger.client.ApiClient;
 //import io.restassured.builder.RequestSpecBuilder;
 //import io.restassured.filter.log.ErrorLoggingFilter;
 
@@ -50,7 +50,7 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/xml, application/json
 
 <a name="getInventory"></a>
 # **getInventory**
@@ -63,7 +63,7 @@ Returns a map of status codes to quantities
 ### Example
 ```java
 // Import classes:
-//import org.openapitools.client.ApiClient;
+//import io.swagger.client.ApiClient;
 //import io.restassured.builder.RequestSpecBuilder;
 //import io.restassured.filter.log.ErrorLoggingFilter;
 
@@ -101,7 +101,7 @@ For valid response try integer IDs with value &lt;&#x3D; 5 or &gt; 10. Other val
 ### Example
 ```java
 // Import classes:
-//import org.openapitools.client.ApiClient;
+//import io.swagger.client.ApiClient;
 //import io.restassured.builder.RequestSpecBuilder;
 //import io.restassured.filter.log.ErrorLoggingFilter;
 
@@ -134,14 +134,16 @@ No authorization required
 
 <a name="placeOrder"></a>
 # **placeOrder**
-> Order placeOrder(order)
+> Order placeOrder(body)
 
 Place an order for a pet
+
+
 
 ### Example
 ```java
 // Import classes:
-//import org.openapitools.client.ApiClient;
+//import io.swagger.client.ApiClient;
 //import io.restassured.builder.RequestSpecBuilder;
 //import io.restassured.filter.log.ErrorLoggingFilter;
 
@@ -150,14 +152,14 @@ StoreApi api = ApiClient.api(ApiClient.Config.apiConfig().withReqSpecSupplier(
                         .setBaseUri("http://petstore.swagger.io:80/v2"))).store();
 
 api.placeOrder()
-    .body(order).execute(r -> r.prettyPeek());
+    .body(body).execute(r -> r.prettyPeek());
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **order** | [**Order**](Order.md)| order placed for purchasing the pet |
+ **body** | [**Order**](Order.md)| order placed for purchasing the pet |
 
 ### Return type
 

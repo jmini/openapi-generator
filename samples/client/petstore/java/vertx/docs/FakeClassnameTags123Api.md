@@ -9,20 +9,18 @@ Method | HTTP request | Description
 
 <a name="testClassname"></a>
 # **testClassname**
-> Client testClassname(client)
-
-To test class name in snake case
+> Client testClassname(body)
 
 To test class name in snake case
 
 ### Example
 ```java
 // Import classes:
-//import org.openapitools.client.ApiClient;
-//import org.openapitools.client.ApiException;
-//import org.openapitools.client.Configuration;
-//import org.openapitools.client.auth.*;
-//import org.openapitools.client.api.FakeClassnameTags123Api;
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.FakeClassnameTags123Api;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -33,9 +31,9 @@ api_key_query.setApiKey("YOUR API KEY");
 //api_key_query.setApiKeyPrefix("Token");
 
 FakeClassnameTags123Api apiInstance = new FakeClassnameTags123Api();
-Client client = new Client(); // Client | client model
+Client body = new Client(); // Client | client model
 try {
-    Client result = apiInstance.testClassname(client);
+    Client result = apiInstance.testClassname(body);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling FakeClassnameTags123Api#testClassname");
@@ -47,7 +45,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **client** | [**Client**](Client.md)| client model |
+ **body** | [**Client**](Client.md)| client model |
 
 ### Return type
 

@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 <a name="testSpecialTags"></a>
 # **testSpecialTags**
-> Client testSpecialTags(client)
+> Client testSpecialTags(body)
 
 To test special tags
 
@@ -18,14 +18,14 @@ To test special tags
 ### Example
 ```java
 // Import classes:
-//import org.openapitools.client.ApiException;
-//import org.openapitools.client.api.AnotherFakeApi;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.api.AnotherFakeApi;
 
 
 AnotherFakeApi apiInstance = new AnotherFakeApi();
-Client client = new Client(); // Client | client model
+Client body = new Client(); // Client | client model
 try {
-    Client result = apiInstance.testSpecialTags(client);
+    Client result = apiInstance.testSpecialTags(body);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling AnotherFakeApi#testSpecialTags");
@@ -37,7 +37,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **client** | [**Client**](Client.md)| client model |
+ **body** | [**Client**](Client.md)| client model |
 
 ### Return type
 

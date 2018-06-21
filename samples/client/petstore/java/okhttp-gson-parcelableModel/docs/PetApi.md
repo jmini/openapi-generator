@@ -16,18 +16,20 @@ Method | HTTP request | Description
 
 <a name="addPet"></a>
 # **addPet**
-> addPet(pet)
+> addPet(body)
 
 Add a new pet to the store
+
+
 
 ### Example
 ```java
 // Import classes:
-//import org.openapitools.client.ApiClient;
-//import org.openapitools.client.ApiException;
-//import org.openapitools.client.Configuration;
-//import org.openapitools.client.auth.*;
-//import org.openapitools.client.api.PetApi;
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.PetApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -36,9 +38,9 @@ OAuth petstore_auth = (OAuth) defaultClient.getAuthentication("petstore_auth");
 petstore_auth.setAccessToken("YOUR ACCESS TOKEN");
 
 PetApi apiInstance = new PetApi();
-Pet pet = new Pet(); // Pet | Pet object that needs to be added to the store
+Pet body = new Pet(); // Pet | Pet object that needs to be added to the store
 try {
-    apiInstance.addPet(pet);
+    apiInstance.addPet(body);
 } catch (ApiException e) {
     System.err.println("Exception when calling PetApi#addPet");
     e.printStackTrace();
@@ -49,7 +51,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pet** | [**Pet**](Pet.md)| Pet object that needs to be added to the store |
+ **body** | [**Pet**](Pet.md)| Pet object that needs to be added to the store |
 
 ### Return type
 
@@ -62,7 +64,7 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json, application/xml
- - **Accept**: Not defined
+ - **Accept**: application/xml, application/json
 
 <a name="deletePet"></a>
 # **deletePet**
@@ -70,14 +72,16 @@ null (empty response body)
 
 Deletes a pet
 
+
+
 ### Example
 ```java
 // Import classes:
-//import org.openapitools.client.ApiClient;
-//import org.openapitools.client.ApiException;
-//import org.openapitools.client.Configuration;
-//import org.openapitools.client.auth.*;
-//import org.openapitools.client.api.PetApi;
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.PetApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -86,7 +90,7 @@ OAuth petstore_auth = (OAuth) defaultClient.getAuthentication("petstore_auth");
 petstore_auth.setAccessToken("YOUR ACCESS TOKEN");
 
 PetApi apiInstance = new PetApi();
-Long petId = 56L; // Long | Pet id to delete
+Long petId = 789L; // Long | Pet id to delete
 String apiKey = "apiKey_example"; // String | 
 try {
     apiInstance.deletePet(petId, apiKey);
@@ -114,7 +118,7 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/xml, application/json
 
 <a name="findPetsByStatus"></a>
 # **findPetsByStatus**
@@ -127,11 +131,11 @@ Multiple status values can be provided with comma separated strings
 ### Example
 ```java
 // Import classes:
-//import org.openapitools.client.ApiClient;
-//import org.openapitools.client.ApiException;
-//import org.openapitools.client.Configuration;
-//import org.openapitools.client.auth.*;
-//import org.openapitools.client.api.PetApi;
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.PetApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -180,11 +184,11 @@ Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3
 ### Example
 ```java
 // Import classes:
-//import org.openapitools.client.ApiClient;
-//import org.openapitools.client.ApiException;
-//import org.openapitools.client.Configuration;
-//import org.openapitools.client.auth.*;
-//import org.openapitools.client.api.PetApi;
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.PetApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -233,11 +237,11 @@ Returns a single pet
 ### Example
 ```java
 // Import classes:
-//import org.openapitools.client.ApiClient;
-//import org.openapitools.client.ApiException;
-//import org.openapitools.client.Configuration;
-//import org.openapitools.client.auth.*;
-//import org.openapitools.client.api.PetApi;
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.PetApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -248,7 +252,7 @@ api_key.setApiKey("YOUR API KEY");
 //api_key.setApiKeyPrefix("Token");
 
 PetApi apiInstance = new PetApi();
-Long petId = 56L; // Long | ID of pet to return
+Long petId = 789L; // Long | ID of pet to return
 try {
     Pet result = apiInstance.getPetById(petId);
     System.out.println(result);
@@ -279,18 +283,20 @@ Name | Type | Description  | Notes
 
 <a name="updatePet"></a>
 # **updatePet**
-> updatePet(pet)
+> updatePet(body)
 
 Update an existing pet
+
+
 
 ### Example
 ```java
 // Import classes:
-//import org.openapitools.client.ApiClient;
-//import org.openapitools.client.ApiException;
-//import org.openapitools.client.Configuration;
-//import org.openapitools.client.auth.*;
-//import org.openapitools.client.api.PetApi;
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.PetApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -299,9 +305,9 @@ OAuth petstore_auth = (OAuth) defaultClient.getAuthentication("petstore_auth");
 petstore_auth.setAccessToken("YOUR ACCESS TOKEN");
 
 PetApi apiInstance = new PetApi();
-Pet pet = new Pet(); // Pet | Pet object that needs to be added to the store
+Pet body = new Pet(); // Pet | Pet object that needs to be added to the store
 try {
-    apiInstance.updatePet(pet);
+    apiInstance.updatePet(body);
 } catch (ApiException e) {
     System.err.println("Exception when calling PetApi#updatePet");
     e.printStackTrace();
@@ -312,7 +318,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pet** | [**Pet**](Pet.md)| Pet object that needs to be added to the store |
+ **body** | [**Pet**](Pet.md)| Pet object that needs to be added to the store |
 
 ### Return type
 
@@ -325,7 +331,7 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json, application/xml
- - **Accept**: Not defined
+ - **Accept**: application/xml, application/json
 
 <a name="updatePetWithForm"></a>
 # **updatePetWithForm**
@@ -333,14 +339,16 @@ null (empty response body)
 
 Updates a pet in the store with form data
 
+
+
 ### Example
 ```java
 // Import classes:
-//import org.openapitools.client.ApiClient;
-//import org.openapitools.client.ApiException;
-//import org.openapitools.client.Configuration;
-//import org.openapitools.client.auth.*;
-//import org.openapitools.client.api.PetApi;
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.PetApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -349,9 +357,9 @@ OAuth petstore_auth = (OAuth) defaultClient.getAuthentication("petstore_auth");
 petstore_auth.setAccessToken("YOUR ACCESS TOKEN");
 
 PetApi apiInstance = new PetApi();
-Long petId = 56L; // Long | ID of pet that needs to be updated
-String name = "null"; // String | Updated name of the pet
-String status = "null"; // String | Updated status of the pet
+Long petId = 789L; // Long | ID of pet that needs to be updated
+String name = "name_example"; // String | Updated name of the pet
+String status = "status_example"; // String | Updated status of the pet
 try {
     apiInstance.updatePetWithForm(petId, name, status);
 } catch (ApiException e) {
@@ -365,8 +373,8 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **petId** | **Long**| ID of pet that needs to be updated |
- **name** | **String**| Updated name of the pet | [optional] [default to null]
- **status** | **String**| Updated status of the pet | [optional] [default to null]
+ **name** | **String**| Updated name of the pet | [optional]
+ **status** | **String**| Updated status of the pet | [optional]
 
 ### Return type
 
@@ -379,7 +387,7 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/x-www-form-urlencoded
- - **Accept**: Not defined
+ - **Accept**: application/xml, application/json
 
 <a name="uploadFile"></a>
 # **uploadFile**
@@ -387,14 +395,16 @@ null (empty response body)
 
 uploads an image
 
+
+
 ### Example
 ```java
 // Import classes:
-//import org.openapitools.client.ApiClient;
-//import org.openapitools.client.ApiException;
-//import org.openapitools.client.Configuration;
-//import org.openapitools.client.auth.*;
-//import org.openapitools.client.api.PetApi;
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.PetApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -403,9 +413,9 @@ OAuth petstore_auth = (OAuth) defaultClient.getAuthentication("petstore_auth");
 petstore_auth.setAccessToken("YOUR ACCESS TOKEN");
 
 PetApi apiInstance = new PetApi();
-Long petId = 56L; // Long | ID of pet to update
-String additionalMetadata = "null"; // String | Additional data to pass to server
-File file = new File("null"); // File | file to upload
+Long petId = 789L; // Long | ID of pet to update
+String additionalMetadata = "additionalMetadata_example"; // String | Additional data to pass to server
+File file = new File("/path/to/file.txt"); // File | file to upload
 try {
     ModelApiResponse result = apiInstance.uploadFile(petId, additionalMetadata, file);
     System.out.println(result);
@@ -420,8 +430,8 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **petId** | **Long**| ID of pet to update |
- **additionalMetadata** | **String**| Additional data to pass to server | [optional] [default to null]
- **file** | **File**| file to upload | [optional] [default to null]
+ **additionalMetadata** | **String**| Additional data to pass to server | [optional]
+ **file** | **File**| file to upload | [optional]
 
 ### Return type
 

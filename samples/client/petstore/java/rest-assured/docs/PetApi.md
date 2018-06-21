@@ -16,14 +16,16 @@ Method | HTTP request | Description
 
 <a name="addPet"></a>
 # **addPet**
-> addPet(pet)
+> addPet(body)
 
 Add a new pet to the store
+
+
 
 ### Example
 ```java
 // Import classes:
-//import org.openapitools.client.ApiClient;
+//import io.swagger.client.ApiClient;
 //import io.restassured.builder.RequestSpecBuilder;
 //import io.restassured.filter.log.ErrorLoggingFilter;
 
@@ -32,14 +34,14 @@ PetApi api = ApiClient.api(ApiClient.Config.apiConfig().withReqSpecSupplier(
                         .setBaseUri("http://petstore.swagger.io:80/v2"))).pet();
 
 api.addPet()
-    .body(pet).execute(r -> r.prettyPeek());
+    .body(body).execute(r -> r.prettyPeek());
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pet** | [**Pet**](Pet.md)| Pet object that needs to be added to the store |
+ **body** | [**Pet**](Pet.md)| Pet object that needs to be added to the store |
 
 ### Return type
 
@@ -52,7 +54,7 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json, application/xml
- - **Accept**: Not defined
+ - **Accept**: application/xml, application/json
 
 <a name="deletePet"></a>
 # **deletePet**
@@ -60,10 +62,12 @@ null (empty response body)
 
 Deletes a pet
 
+
+
 ### Example
 ```java
 // Import classes:
-//import org.openapitools.client.ApiClient;
+//import io.swagger.client.ApiClient;
 //import io.restassured.builder.RequestSpecBuilder;
 //import io.restassured.filter.log.ErrorLoggingFilter;
 
@@ -93,7 +97,7 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/xml, application/json
 
 <a name="findPetsByStatus"></a>
 # **findPetsByStatus**
@@ -106,7 +110,7 @@ Multiple status values can be provided with comma separated strings
 ### Example
 ```java
 // Import classes:
-//import org.openapitools.client.ApiClient;
+//import io.swagger.client.ApiClient;
 //import io.restassured.builder.RequestSpecBuilder;
 //import io.restassured.filter.log.ErrorLoggingFilter;
 
@@ -148,7 +152,7 @@ Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3
 ### Example
 ```java
 // Import classes:
-//import org.openapitools.client.ApiClient;
+//import io.swagger.client.ApiClient;
 //import io.restassured.builder.RequestSpecBuilder;
 //import io.restassured.filter.log.ErrorLoggingFilter;
 
@@ -190,7 +194,7 @@ Returns a single pet
 ### Example
 ```java
 // Import classes:
-//import org.openapitools.client.ApiClient;
+//import io.swagger.client.ApiClient;
 //import io.restassured.builder.RequestSpecBuilder;
 //import io.restassured.filter.log.ErrorLoggingFilter;
 
@@ -223,14 +227,16 @@ Name | Type | Description  | Notes
 
 <a name="updatePet"></a>
 # **updatePet**
-> updatePet(pet)
+> updatePet(body)
 
 Update an existing pet
+
+
 
 ### Example
 ```java
 // Import classes:
-//import org.openapitools.client.ApiClient;
+//import io.swagger.client.ApiClient;
 //import io.restassured.builder.RequestSpecBuilder;
 //import io.restassured.filter.log.ErrorLoggingFilter;
 
@@ -239,14 +245,14 @@ PetApi api = ApiClient.api(ApiClient.Config.apiConfig().withReqSpecSupplier(
                         .setBaseUri("http://petstore.swagger.io:80/v2"))).pet();
 
 api.updatePet()
-    .body(pet).execute(r -> r.prettyPeek());
+    .body(body).execute(r -> r.prettyPeek());
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pet** | [**Pet**](Pet.md)| Pet object that needs to be added to the store |
+ **body** | [**Pet**](Pet.md)| Pet object that needs to be added to the store |
 
 ### Return type
 
@@ -259,7 +265,7 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json, application/xml
- - **Accept**: Not defined
+ - **Accept**: application/xml, application/json
 
 <a name="updatePetWithForm"></a>
 # **updatePetWithForm**
@@ -267,10 +273,12 @@ null (empty response body)
 
 Updates a pet in the store with form data
 
+
+
 ### Example
 ```java
 // Import classes:
-//import org.openapitools.client.ApiClient;
+//import io.swagger.client.ApiClient;
 //import io.restassured.builder.RequestSpecBuilder;
 //import io.restassured.filter.log.ErrorLoggingFilter;
 
@@ -287,8 +295,8 @@ api.updatePetWithForm()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **petId** | **Long**| ID of pet that needs to be updated |
- **name** | **String**| Updated name of the pet | [optional] [default to null]
- **status** | **String**| Updated status of the pet | [optional] [default to null]
+ **name** | **String**| Updated name of the pet | [optional]
+ **status** | **String**| Updated status of the pet | [optional]
 
 ### Return type
 
@@ -301,7 +309,7 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/x-www-form-urlencoded
- - **Accept**: Not defined
+ - **Accept**: application/xml, application/json
 
 <a name="uploadFile"></a>
 # **uploadFile**
@@ -309,10 +317,12 @@ null (empty response body)
 
 uploads an image
 
+
+
 ### Example
 ```java
 // Import classes:
-//import org.openapitools.client.ApiClient;
+//import io.swagger.client.ApiClient;
 //import io.restassured.builder.RequestSpecBuilder;
 //import io.restassured.filter.log.ErrorLoggingFilter;
 
@@ -329,8 +339,8 @@ api.uploadFile()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **petId** | **Long**| ID of pet to update |
- **additionalMetadata** | **String**| Additional data to pass to server | [optional] [default to null]
- **file** | **File**| file to upload | [optional] [default to null]
+ **additionalMetadata** | **String**| Additional data to pass to server | [optional]
+ **file** | **File**| file to upload | [optional]
 
 ### Return type
 

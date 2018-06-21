@@ -1,7 +1,7 @@
 apply plugin: 'idea'
 apply plugin: 'eclipse'
 
-group = 'org.openapitools'
+group = 'io.swagger'
 version = '1.0.0'
 
 buildscript {
@@ -17,6 +17,7 @@ buildscript {
 repositories {
     jcenter()
 }
+
 
 if(hasProperty('target') && target == 'android') {
 
@@ -82,28 +83,13 @@ if(hasProperty('target') && target == 'android') {
 
     install {
         repositories.mavenInstaller {
-            pom.artifactId = 'petstore-java-client-jersey1'
+            pom.artifactId = 'swagger-java-client'
         }
     }
 
     task execute(type:JavaExec) {
        main = System.getProperty('mainClass')
        classpath = sourceSets.main.runtimeClasspath
-    }
-    
-    task sourcesJar(type: Jar, dependsOn: classes) {
-        classifier = 'sources'
-        from sourceSets.main.allSource
-    }
-
-    task javadocJar(type: Jar, dependsOn: javadoc) {
-        classifier = 'javadoc'
-        from javadoc.destinationDir
-    }
-
-    artifacts {
-        archives sourcesJar
-        archives javadocJar
     }
 }
 
@@ -123,8 +109,7 @@ dependencies {
     compile "com.fasterxml.jackson.core:jackson-annotations:$jackson_version"
     compile "com.fasterxml.jackson.core:jackson-databind:$jackson_version"
     compile "com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:$jackson_version"
-    compile "com.github.joschi.jackson:jackson-datatype-threetenbp:$jackson_version"
+    compile "com.github.joschi.jackson:jackson-datatype-threetenbp:$jackson_version",
     compile "com.brsanthu:migbase64:2.2"
     testCompile "junit:junit:$junit_version"
 }
-

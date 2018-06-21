@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 <a name="testSpecialTags"></a>
 # **testSpecialTags**
-> Client testSpecialTags(client)
+> Client testSpecialTags(body)
 
 To test special tags
 
@@ -18,7 +18,7 @@ To test special tags
 ### Example
 ```java
 // Import classes:
-//import org.openapitools.client.ApiClient;
+//import io.swagger.client.ApiClient;
 //import io.restassured.builder.RequestSpecBuilder;
 //import io.restassured.filter.log.ErrorLoggingFilter;
 
@@ -27,14 +27,14 @@ AnotherFakeApi api = ApiClient.api(ApiClient.Config.apiConfig().withReqSpecSuppl
                         .setBaseUri("http://petstore.swagger.io:80/v2"))).anotherFake();
 
 api.testSpecialTags()
-    .body(client).execute(r -> r.prettyPeek());
+    .body(body).execute(r -> r.prettyPeek());
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **client** | [**Client**](Client.md)| client model |
+ **body** | [**Client**](Client.md)| client model |
 
 ### Return type
 

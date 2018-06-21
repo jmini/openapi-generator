@@ -21,8 +21,8 @@ For valid response try integer IDs with value &lt; 1000. Anything above 1000 or 
 ### Example
 ```java
 // Import classes:
-//import org.openapitools.client.ApiException;
-//import org.openapitools.client.api.StoreApi;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.api.StoreApi;
 
 
 StoreApi apiInstance = new StoreApi();
@@ -52,7 +52,7 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/xml, application/json
 
 <a name="getInventory"></a>
 # **getInventory**
@@ -65,11 +65,11 @@ Returns a map of status codes to quantities
 ### Example
 ```java
 // Import classes:
-//import org.openapitools.client.ApiClient;
-//import org.openapitools.client.ApiException;
-//import org.openapitools.client.Configuration;
-//import org.openapitools.client.auth.*;
-//import org.openapitools.client.api.StoreApi;
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.StoreApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -116,12 +116,12 @@ For valid response try integer IDs with value &lt;&#x3D; 5 or &gt; 10. Other val
 ### Example
 ```java
 // Import classes:
-//import org.openapitools.client.ApiException;
-//import org.openapitools.client.api.StoreApi;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.api.StoreApi;
 
 
 StoreApi apiInstance = new StoreApi();
-Long orderId = 56L; // Long | ID of pet that needs to be fetched
+Long orderId = 789L; // Long | ID of pet that needs to be fetched
 try {
     Order result = apiInstance.getOrderById(orderId);
     System.out.println(result);
@@ -152,21 +152,23 @@ No authorization required
 
 <a name="placeOrder"></a>
 # **placeOrder**
-> Order placeOrder(order)
+> Order placeOrder(body)
 
 Place an order for a pet
+
+
 
 ### Example
 ```java
 // Import classes:
-//import org.openapitools.client.ApiException;
-//import org.openapitools.client.api.StoreApi;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.api.StoreApi;
 
 
 StoreApi apiInstance = new StoreApi();
-Order order = new Order(); // Order | order placed for purchasing the pet
+Order body = new Order(); // Order | order placed for purchasing the pet
 try {
-    Order result = apiInstance.placeOrder(order);
+    Order result = apiInstance.placeOrder(body);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling StoreApi#placeOrder");
@@ -178,7 +180,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **order** | [**Order**](Order.md)| order placed for purchasing the pet |
+ **body** | [**Order**](Order.md)| order placed for purchasing the pet |
 
 ### Return type
 
