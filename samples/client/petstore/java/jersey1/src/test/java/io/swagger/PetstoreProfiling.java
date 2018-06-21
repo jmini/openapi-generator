@@ -3,9 +3,9 @@ package io.swagger;
 import java.io.*;
 import java.util.*;
 
-import io.swagger.client.*;
-import io.swagger.client.api.*;
-import io.swagger.client.model.*;
+import org.openapitools.client.*;
+import org.openapitools.client.api.*;
+import org.openapitools.client.model.*;
 
 public class PetstoreProfiling {
     public int total = 5;
