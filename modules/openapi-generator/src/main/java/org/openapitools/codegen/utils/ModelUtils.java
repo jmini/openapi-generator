@@ -20,6 +20,7 @@ package org.openapitools.codegen.utils;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.Operation;
 import io.swagger.v3.oas.models.PathItem;
+import io.swagger.v3.oas.models.examples.Example;
 import io.swagger.v3.oas.models.media.ArraySchema;
 import io.swagger.v3.oas.models.media.BinarySchema;
 import io.swagger.v3.oas.models.media.BooleanSchema;
@@ -595,6 +596,35 @@ public class ModelUtils {
 
         if (openAPI != null && openAPI.getComponents() != null && openAPI.getComponents().getParameters() != null) {
             return openAPI.getComponents().getParameters().get(name);
+        }
+        return null;
+    }
+    
+    /**
+     * If a Parameter contains a reference to an other Example with '$ref', returns the referenced Parameter if it is found or the actual Example in the other cases.
+     *
+     * @param openAPI   specification being checked
+     * @param example potentially containing a '$ref'
+     * @return Example without '$ref'
+     */
+    public static Example getReferencedExample(OpenAPI openAPI, Example example) {
+        if (example != null && StringUtils.isNotEmpty(example.get$ref())) {
+            String name = getSimpleRef(example.get$ref());
+            Example referencedExample = getExample(openAPI, name);
+            if (referencedExample != null) {
+                return referencedExample;
+            }
+        }
+        return example;
+    }
+    
+    public static Example getExample(OpenAPI openAPI, String name) {
+        if (name == null) {
+            return null;
+        }
+        
+        if (openAPI != null && openAPI.getComponents() != null && openAPI.getComponents().getExamples() != null) {
+            return openAPI.getComponents().getExamples().get(name);
         }
         return null;
     }

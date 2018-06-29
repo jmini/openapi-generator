@@ -22,6 +22,7 @@ import com.google.common.base.CaseFormat;
 import com.samskivert.mustache.Mustache.Compiler;
 
 import io.swagger.v3.core.util.Json;
+import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.Operation;
 import io.swagger.v3.oas.models.examples.Example;
@@ -1086,15 +1087,16 @@ public class DefaultCodegen implements CodegenConfig {
      *
      * @param codegenParameter Codegen parameter
      * @param parameter Parameter
+     * @param openAPI the current OpenAPI instance
      */
-    public void setParameterExampleValue(CodegenParameter codegenParameter, Parameter parameter) {
+    public void setParameterExampleValue(CodegenParameter codegenParameter, Parameter parameter, OpenAPI openAPI) {
         if (parameter.getExample() != null) {
             codegenParameter.example = parameter.getExample().toString();
             return;
         }
 
         if (parameter.getExamples() != null && !parameter.getExamples().isEmpty()) {
-            Example example = parameter.getExamples().values().iterator().next();
+            Example example = ModelUtils.getReferencedExample(openAPI, parameter.getExamples().values().iterator().next());
             if(example.getValue() != null) {
                 codegenParameter.example = example.getValue().toString();
                 return;
@@ -1115,8 +1117,9 @@ public class DefaultCodegen implements CodegenConfig {
      *
      * @param codegenParameter Codegen parameter
      * @param requestBody Request body
+     * @param openAPI the current OpenAPI instance
      */
-    public void setParameterExampleValue(CodegenParameter codegenParameter, RequestBody requestBody) {
+    public void setParameterExampleValue(CodegenParameter codegenParameter, RequestBody requestBody, OpenAPI openAPI) {
         Content content = requestBody.getContent();
 
         if (content.size() > 1) {
@@ -1131,7 +1134,7 @@ public class DefaultCodegen implements CodegenConfig {
         }
 
         if (mediaType.getExamples() != null && !mediaType.getExamples().isEmpty()) {
-            Example example = mediaType.getExamples().values().iterator().next();
+            Example example = ModelUtils.getReferencedExample(openAPI, mediaType.getExamples().values().iterator().next());
             if(example.getValue() != null) {
                 codegenParameter.example = example.getValue().toString();
                 return;
@@ -2264,7 +2267,7 @@ public class DefaultCodegen implements CodegenConfig {
                 if (op.vendorExtensions != null && op.vendorExtensions.containsKey("x-codegen-request-body-name")) {
                     bodyParameterName = (String) op.vendorExtensions.get("x-codegen-request-body-name");
                 }
-                bodyParam = fromRequestBody(requestBody, schemas, imports, bodyParameterName);
+                bodyParam = fromRequestBody(requestBody, imports, bodyParameterName, openAPI);
                 bodyParam.description = requestBody.getDescription();
                 postProcessParameter(bodyParam);
 
@@ -2287,7 +2290,7 @@ public class DefaultCodegen implements CodegenConfig {
                     param = getParameterFromRef(param.get$ref(), openAPI);
                 }
 
-                CodegenParameter p = fromParameter(param, imports);
+                CodegenParameter p = fromParameter(param, imports, openAPI);
 
                 allParams.add(p);
 
@@ -2510,13 +2513,25 @@ public class DefaultCodegen implements CodegenConfig {
     }
 
     /**
-     * Convert OAS Parameter object to Codegen Parameter object
-     *
+     * @deprecated user {@link #fromParameter(Parameter, Set, OpenAPI)} instead.
      * @param parameter OAS parameter object
      * @param imports   set of imports for library/package/module
      * @return Codegen Parameter object
      */
+    @Deprecated
     public CodegenParameter fromParameter(Parameter parameter, Set<String> imports) {
+        return fromParameter(parameter, imports, null);
+    }
+
+    /**
+     * Convert OAS Parameter object to Codegen Parameter object
+     *
+     * @param parameter OAS parameter object
+     * @param imports   set of imports for library/package/module
+     * @param openAPI   the current OpenAPI instance
+     * @return Codegen Parameter object
+     */
+    public CodegenParameter fromParameter(Parameter parameter, Set<String> imports, OpenAPI openAPI) {
         CodegenParameter codegenParameter = CodegenModelFactory.newInstance(CodegenModelType.PARAMETER);
         codegenParameter.baseName = parameter.getName();
         codegenParameter.description = escapeText(parameter.getDescription());
@@ -2777,7 +2792,7 @@ public class DefaultCodegen implements CodegenConfig {
 
         // set the parameter excample value
         // should be overridden by lang codegen
-        setParameterExampleValue(codegenParameter, parameter);
+        setParameterExampleValue(codegenParameter, parameter, openAPI);
 
         postProcessParameter(codegenParameter);
         LOGGER.debug("debugging codegenParameter return: " + codegenParameter);
@@ -4233,7 +4248,22 @@ public class DefaultCodegen implements CodegenConfig {
         return codegenParameter;
     }
 
+    /**
+     * @deprecated use {@link #fromRequestBody(RequestBody, Set, String, OpenAPI)} instead.
+     * @param body requestBody instance
+     * @param schemas map of all schema of the current OpenAPI instance
+     * @param imports set of imports
+     * @param bodyParameterName name of the RequestBody
+     * @return codegen Parameter
+     */
+    @Deprecated
     public CodegenParameter fromRequestBody(RequestBody body, Map<String, Schema> schemas, Set<String> imports, String bodyParameterName) {
+        OpenAPI openAPI = new OpenAPI();
+        openAPI.setComponents(new Components().schemas(schemas));
+        return fromRequestBody(body, imports, bodyParameterName, openAPI);
+    }
+
+    public CodegenParameter fromRequestBody(RequestBody body, Set<String> imports, String bodyParameterName, OpenAPI openAPI) {
         if (body == null) {
             LOGGER.error("body in fromRequestBody cannot be null!");
         }
@@ -4247,10 +4277,7 @@ public class DefaultCodegen implements CodegenConfig {
         String name = null;
         LOGGER.debug("Request body = " + body);
         Schema schema = ModelUtils.getSchemaFromRequestBody(body);
-        if (StringUtils.isNotBlank(schema.get$ref())) {
-            name = ModelUtils.getSimpleRef(schema.get$ref());
-            schema = schemas.get(name);
-        }
+        schema = ModelUtils.getReferencedSchema(openAPI, schema);
 
         if (ModelUtils.isMapSchema(schema)) {
             Schema inner = (Schema) schema.getAdditionalProperties();
@@ -4321,7 +4348,7 @@ public class DefaultCodegen implements CodegenConfig {
             CodegenModel codegenModel = null;
             if (StringUtils.isNotBlank(name)) {
                 schema.setName(name);
-                codegenModel = fromModel(name, schema, schemas);
+                codegenModel = fromModel(name, schema, ModelUtils.getSchemas(openAPI));
             }
 
             if (codegenModel != null && !codegenModel.emptyVars) {
@@ -4386,7 +4413,7 @@ public class DefaultCodegen implements CodegenConfig {
 
         // set the parameter's example value
         // should be overridden by lang codegen
-        setParameterExampleValue(codegenParameter, body);
+        setParameterExampleValue(codegenParameter, body, openAPI);
 
         return codegenParameter;
     }

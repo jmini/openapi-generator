@@ -572,7 +572,7 @@ public class JavaModelTest {
                 .name("limit")
                 .required(true);
         final DefaultCodegen codegen = new JavaClientCodegen();
-        final CodegenParameter cm = codegen.fromParameter(parameter, null);
+        final CodegenParameter cm = codegen.fromParameter(parameter, null, null);
 
         Assert.assertNull(cm.allowableValues);
         Assert.assertEquals(cm.description, "this is a description");

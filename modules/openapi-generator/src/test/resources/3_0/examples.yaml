@@ -34,6 +34,20 @@ paths:
       responses:
         '200':
           description: successful operation
+  /example1/withRef:
+    get:
+      operationId: example1GetWithRef
+      parameters:
+        - name: parameter
+          in: query
+          examples:
+            AnExample:
+              $ref: '#/components/examples/RefExampleA'
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
   /example2/singular:
     get:
       operationId: example2GetSingular
@@ -107,4 +121,26 @@ paths:
       responses:
         '200':
           description: successful operation
-
+  /example4/withRef:
+    post:
+      operationId: example4PostWithRef
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+            examples:
+              AnExample:
+                $ref: "#/components/examples/RefExampleB"
+      responses:
+        '200':
+          description: successful operation
+components:
+  examples:
+    RefExampleA:
+      value: Ref example value A
+    RefExampleB:
+      value: Ref example value B

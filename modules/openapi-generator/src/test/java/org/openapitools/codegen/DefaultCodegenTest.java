@@ -240,15 +240,21 @@ public class DefaultCodegenTest {
 
         Operation operation = openAPI.getPaths().get("/example1/singular").getGet();
         CodegenParameter codegenParameter = CodegenModelFactory.newInstance(CodegenModelType.PARAMETER);
-        codegen.setParameterExampleValue(codegenParameter, operation.getParameters().get(0));
+        codegen.setParameterExampleValue(codegenParameter, operation.getParameters().get(0), openAPI);
 
         Assert.assertEquals(codegenParameter.example, "example1 value");
 
         Operation operation2 = openAPI.getPaths().get("/example1/plural").getGet();
         CodegenParameter codegenParameter2 = CodegenModelFactory.newInstance(CodegenModelType.PARAMETER);
-        codegen.setParameterExampleValue(codegenParameter2, operation2.getParameters().get(0));
+        codegen.setParameterExampleValue(codegenParameter2, operation2.getParameters().get(0), openAPI);
 
         Assert.assertEquals(codegenParameter2.example, "An example1 value");
+
+        Operation operation3 = openAPI.getPaths().get("/example1/withRef").getGet();
+        CodegenParameter codegenParameter3 = CodegenModelFactory.newInstance(CodegenModelType.PARAMETER);
+        codegen.setParameterExampleValue(codegenParameter3, operation3.getParameters().get(0), openAPI);
+
+        Assert.assertEquals(codegenParameter3.example, "Ref example value A");
     }
 
     @Test
@@ -258,7 +264,7 @@ public class DefaultCodegenTest {
 
         Operation operation = openAPI.getPaths().get("/example2/singular").getGet();
         CodegenParameter codegenParameter = CodegenModelFactory.newInstance(CodegenModelType.PARAMETER);
-        codegen.setParameterExampleValue(codegenParameter, operation.getParameters().get(0));
+        codegen.setParameterExampleValue(codegenParameter, operation.getParameters().get(0), openAPI);
 
         Assert.assertEquals(codegenParameter.example, "example2 value");
     }
@@ -270,13 +276,13 @@ public class DefaultCodegenTest {
 
         Operation operation = openAPI.getPaths().get("/example3/singular").getGet();
         CodegenParameter codegenParameter = CodegenModelFactory.newInstance(CodegenModelType.PARAMETER);
-        codegen.setParameterExampleValue(codegenParameter, operation.getParameters().get(0));
+        codegen.setParameterExampleValue(codegenParameter, operation.getParameters().get(0), openAPI);
 
         Assert.assertEquals(codegenParameter.example, "example3: parameter value");
 
         Operation operation2 = openAPI.getPaths().get("/example3/plural").getGet();
         CodegenParameter codegenParameter2 = CodegenModelFactory.newInstance(CodegenModelType.PARAMETER);
-        codegen.setParameterExampleValue(codegenParameter2, operation2.getParameters().get(0));
+        codegen.setParameterExampleValue(codegenParameter2, operation2.getParameters().get(0), openAPI);
 
         Assert.assertEquals(codegenParameter2.example, "example3: parameter value");
     }
@@ -288,15 +294,21 @@ public class DefaultCodegenTest {
 
         Operation operation = openAPI.getPaths().get("/example4/singular").getPost();
         CodegenParameter codegenParameter = CodegenModelFactory.newInstance(CodegenModelType.PARAMETER);
-        codegen.setParameterExampleValue(codegenParameter, operation.getRequestBody());
+        codegen.setParameterExampleValue(codegenParameter, operation.getRequestBody(), openAPI);
 
         Assert.assertEquals(codegenParameter.example, "example4 value");
 
         Operation operation2 = openAPI.getPaths().get("/example4/plural").getPost();
         CodegenParameter codegenParameter2 = CodegenModelFactory.newInstance(CodegenModelType.PARAMETER);
-        codegen.setParameterExampleValue(codegenParameter2, operation2.getRequestBody());
+        codegen.setParameterExampleValue(codegenParameter2, operation2.getRequestBody(), openAPI);
 
         Assert.assertEquals(codegenParameter2.example, "An example4 value");
+
+        Operation operation3 = openAPI.getPaths().get("/example4/withRef").getPost();
+        CodegenParameter codegenParameter3 = CodegenModelFactory.newInstance(CodegenModelType.PARAMETER);
+        codegen.setParameterExampleValue(codegenParameter3, operation3.getRequestBody(), openAPI);
+
+        Assert.assertEquals(codegenParameter3.example, "Ref example value B");
     }
 
     private CodegenProperty codegenPropertyWithArrayOfIntegerValues() {
