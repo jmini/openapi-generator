@@ -518,12 +518,15 @@ public class ApiClient {
    *   otherwise use the first one of the array.
    *
    * @param contentTypes The Content-Type array to select from
-   * @return The Content-Type header to use. If the given array is empty,
-   *   or matches "any", JSON will be used.
+   * @return The Content-Type header to use. If the given array is empty, null will be returned.
+   *   If the given array matches "any", JSON will be used.
    */
   public String selectHeaderContentType(String[] contentTypes) {
-    if (contentTypes.length == 0 || contentTypes[0].equals("*/*")) {
-      return "application/json";
+    if (contentTypes.length == 0) {
+      return null;
+    }
+    if(contentTypes[0].equals("*/*")) {
+        return "application/json";
     }
     for (String contentType : contentTypes) {
       if (isJsonMime(contentType)) {
@@ -556,7 +559,7 @@ public class ApiClient {
    * @throws ApiException API exception
    */
   public Object serialize(Object obj, String contentType, Map<String, Object> formParams) throws ApiException {
-    if (contentType.startsWith("multipart/form-data")) {
+    if (contentType != null && contentType.startsWith("multipart/form-data")) {
       FormDataMultiPart mp = new FormDataMultiPart();
       for (Entry<String, Object> param: formParams.entrySet()) {
         if( param.getValue() instanceof List && !( ( List ) param.getValue() ).isEmpty()
@@ -574,7 +577,7 @@ public class ApiClient {
         }
       }
       return mp;
-    } else if (contentType.startsWith("application/x-www-form-urlencoded")) {
+    } else if (contentType != null && contentType.startsWith("application/x-www-form-urlencoded")) {
       return this.getXWWWFormUrlencodedParams(formParams);
     } else {
       // We let Jersey attempt to serialize the body
@@ -659,18 +662,23 @@ public class ApiClient {
 
     if ("GET".equals(method)) {
       response = (ClientResponse) builder.get(ClientResponse.class);
-    } else if ("POST".equals(method)) {
-      response = builder.type(contentType).post(ClientResponse.class, serialize(body, contentType, formParams));
-    } else if ("PUT".equals(method)) {
-      response = builder.type(contentType).put(ClientResponse.class, serialize(body, contentType, formParams));
-    } else if ("DELETE".equals(method)) {
-      response = builder.type(contentType).delete(ClientResponse.class, serialize(body, contentType, formParams));
-    } else if ("PATCH".equals(method)) {
-      response = builder.type(contentType).header("X-HTTP-Method-Override", "PATCH").post(ClientResponse.class, serialize(body, contentType, formParams));
     } else if ("HEAD".equals(method)) {
       response = builder.head();
     } else {
-      throw new ApiException(500, "unknown method type " + method);
+      if(contentType != null) {
+        builder = builder.type(contentType);
+      }
+      if ("POST".equals(method)) {
+        response = builder.post(ClientResponse.class, serialize(body, contentType, formParams));
+      } else if ("PUT".equals(method)) {
+        response = builder.put(ClientResponse.class, serialize(body, contentType, formParams));
+      } else if ("DELETE".equals(method)) {
+        response = builder.delete(ClientResponse.class, serialize(body, contentType, formParams));
+      } else if ("PATCH".equals(method)) {
+        response = builder.header("X-HTTP-Method-Override", "PATCH").post(ClientResponse.class, serialize(body, contentType, formParams));
+      } else {
+        throw new ApiException(500, "unknown method type " + method);
+      }
     }
     return response;
   }

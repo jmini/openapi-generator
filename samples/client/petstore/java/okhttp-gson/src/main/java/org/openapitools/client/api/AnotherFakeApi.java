@@ -85,7 +85,9 @@ public class AnotherFakeApi {
             "application/json"
         };
         final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if(localVarContentType != null) {
+          localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         if(progressListener != null) {
             apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {

@@ -425,7 +425,10 @@ public class ApiClient {
         }
 
         if (contentTypes != null) {
-            headerParams.add(HttpHeaders.CONTENT_TYPE, selectHeaderContentType(contentTypes));
+            String contentTypeValue = selectHeaderContentType(contentTypes);
+            if(contentTypeValue != null) {
+              headerParams.add(HttpHeaders.CONTENT_TYPE, contentTypeValue);
+            }
         }
 
         HttpMethod httpMethod = HttpMethod.valueOf(method);

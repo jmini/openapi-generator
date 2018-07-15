@@ -101,7 +101,7 @@ public class ApiClientTest {
         assertEquals(MediaType.parseMediaType("text/plain"), apiClient.selectHeaderContentType(contentTypes));
 
         contentTypes = new String[]{};
-        assertEquals(MediaType.parseMediaType("application/json"), apiClient.selectHeaderContentType(contentTypes));
+        assertEquals(null, apiClient.selectHeaderContentType(contentTypes));
     }
 
     @Test

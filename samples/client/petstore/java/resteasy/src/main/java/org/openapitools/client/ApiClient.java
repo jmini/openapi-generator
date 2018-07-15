@@ -439,11 +439,11 @@ public class ApiClient {
    *
    * @param contentTypes The Content-Type array to select from
    * @return The Content-Type header to use. If the given array is empty,
-   *   JSON will be used.
+   *   null will be returned.
    */
   public String selectHeaderContentType(String[] contentTypes) {
     if (contentTypes.length == 0) {
-      return "application/json";
+      return null;
     }
     for (String contentType : contentTypes) {
       if (isJsonMime(contentType)) {
@@ -477,7 +477,7 @@ public class ApiClient {
    */
   public Entity<?> serialize(Object obj, Map<String, Object> formParams, String contentType) throws ApiException {
     Entity<?> entity = null;
-    if (contentType.startsWith("multipart/form-data")) {
+    if (contentType != null && contentType.startsWith("multipart/form-data")) {
       MultipartFormDataOutput multipart = new MultipartFormDataOutput();  
       //MultiPart multiPart = new MultiPart();
       for (Entry<String, Object> param: formParams.entrySet()) {
@@ -493,7 +493,7 @@ public class ApiClient {
         }
       }
       entity = Entity.entity(multipart.getFormData(), MediaType.MULTIPART_FORM_DATA_TYPE);
-    } else if (contentType.startsWith("application/x-www-form-urlencoded")) {
+    } else if (contentType != null && contentType.startsWith("application/x-www-form-urlencoded")) {
       Form form = new Form();
       for (Entry<String, Object> param: formParams.entrySet()) {
         form.param(param.getKey(), parameterToString(param.getValue()));

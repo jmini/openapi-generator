@@ -475,11 +475,11 @@ public class ApiClient {
    *
    * @param contentTypes The Content-Type array to select from
    * @return The Content-Type header to use. If the given array is empty,
-   *   JSON will be used.
+   *   null is returned.
    */
   public String selectHeaderContentType(String[] contentTypes) {
     if (contentTypes.length == 0) {
-      return "application/json";
+      return null;
     }
     for (String contentType : contentTypes) {
       if (isJsonMime(contentType)) {
